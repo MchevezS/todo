@@ -3,6 +3,7 @@ import './App.css'
 import { PostGuarda } from './Js/Post'
 import {obtenerDatos} from './Js/Get'
 import ListadoTareas from './Componentes/ListadoTarea'
+import ListaDeTarea from './Componentes/ListaDeTareas'
 
 
 function App() {
