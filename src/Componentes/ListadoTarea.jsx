@@ -1,14 +1,14 @@
 import { eliminarTarea } from "../Js/Delete"
 import ListaDeTarea from "./ListaDeTareas"
 
-const ListadoTareas = ({lista})=>{
+const ListadoTareas = ({lista, eliminarTarea }) => {
     return(
         <>
             {lista && lista.map((tarea) => (
                 <div key={tarea.id}>
                     <input type="checkbox"/>
                     <p>{tarea.titulo}</p>
-//                     <button onClick={() => eliminarTarea(tarea.id)}>Eliminar tarea</button>
+//                     <button onClick={() => eliminarTarea(tarea.id)}>Eliminar </button>
                 </div>
             ))}
         </>
@@ -16,12 +16,12 @@ const ListadoTareas = ({lista})=>{
 }
 
 export default ListadoTareas;
-// import React from 'react';
+// // import React from 'react';
 
 // const ListadoTareas = ({ lista }) => {
 //     return (
 //         <>
-//             {lista && lista.map((tarea) => (
+//             {lista.map((tarea) => (
 //                 <div key={tarea.id}>
 //                     <input type="checkbox" />
 //                     <p>{tarea.titulo}</p>

@@ -25,10 +25,23 @@ function App() {
         estado:false
       }
       await PostGuarda(tarea)
+      
     } catch (error) {
       console.log(error);
     }
   }
+
+  // const validar = () => {
+  //   const inputTarea = inputRef.current.value;
+  //   let validarInput = true;
+  //   if (inputTarea.trim() === "") {
+  //     validar = false; 
+      
+  //   }
+  //   return validar;
+  // }
+
+
   const inputTarea= useRef('')
   const validarVacio = (e) =>{
       e.preventDefault()              
@@ -43,14 +56,25 @@ function App() {
         }
     }
 
+    // const [tareas, setTareas] = useState([...  ]) // Agrega tu lista de tareas aquí
+
+    // const eliminarTarea = (id) => {
+    //     // Lógica para eliminar la tarea con el id proporcionado//
+    // }
+   
+    //   const nuevasTareas = tareas.filter(tarea => tarea.id !== id);
+    //   // Actualizar el estado de tareas con la nueva lista filtrada
+    //   setTareas(nuevasTareas);
+  
+
   return (
     <>
     <h1> Lista de tareas </h1>
     
     <input placeholder="Inserte sus tareas" type="text" ref={inputTarea} onChange={(e)=>setTituloTarea(e.target.value)}/>
     <button className="btnAgregarTarea" onClick={validarVacio}> Agregar tarea </button>
-    <ListadoTareas lista={data}/>
-           
+     <ListadoTareas lista={data}/> 
+    {/* <ListadoTareas lista={tareas} eliminarTarea={eliminarTarea} />      */}
     </>
     
   )
