@@ -1,8 +1,9 @@
-import { Tareas } from "./Tareas";
-import { obtenerDatos } from "../Js/Get";
-import { PostGuarda } from "../Js/Post";
+import { obtenerDatos } from "../Js/Get.js";
+import { PostGuarda } from "../Js/Post.js";
 
-const listaDeTarea = ({tareas}) =>{             //tareas es un parametro de esta funcion
+
+
+const ListaDeTarea = ({tareas}) =>{ //tareas es un parametro de esta funcion
     return(
         <>
             {tareas.map((tareasPorHcaer,index)=>(
@@ -14,5 +15,4 @@ const listaDeTarea = ({tareas}) =>{             //tareas es un parametro de esta
         </>
     )
 }
-
-export default listaDeTarea
+export default ListaDeTarea

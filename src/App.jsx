@@ -1,35 +1,57 @@
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import './App.css'
-import { obtenerDatos } from './Js/Get'
 import { PostGuarda } from './Js/Post'
-import  Titulo  from './Componentes/Titulo'
-import  listaDeTarea  from './Componentes/listaDeTarea'
-import { eliminarTarea } from './Js/Delete'
-import { Tareas } from './Componentes/Tareas'
+import {obtenerDatos} from './Js/Get'
+import ListadoTareas from './Componentes/ListadoTarea'
 
 
 function App() {
   const [tituloTarea, setTituloTarea] = useState("")
+   const [data, setData]= useState([])
+  useEffect(()=>{
+    const traeDatos = async() =>{
+      const datos = await obtenerDatos();
+      setData(datos)
+    }
+    traeDatos()
+  },[data])
 
-  const agregarTarea = async(e) =>{
+  const agregarTarea = async() =>{
     try {
-      e.preventDefault()
+      console.log('Esta entrando a agregar tarea');
       let tarea = {
-        titulo:tituloTarea
+        titulo:tituloTarea,
+        estado:false
       }
       await PostGuarda(tarea)
-
     } catch (error) {
       console.log(error);
     }
   }
+  const inputTarea= useRef('')
+  const validarVacio = (e) =>{
+      e.preventDefault()              
+      console.log('ingresa a Validar Vacio');
+        if (!inputTarea.current.value) {
+                alert("INPUT VACIO")
+                return
+        }else{
+          console.log('mandande a agregar tarea desde validar vacio');
+          agregarTarea()
+          
+        }
+    }
 
   return (
     <>
     <h1> Lista de tareas </h1>
-    <input type='text' placeholder='Ingrese sus tareas' onChange={(e)=> setTituloTarea(e.target.value)}></input>
-    <button onClick={agregarTarea}>Agregar tareas </button>
+    
+    <input placeholder="Inserte sus tareas" type="text" ref={inputTarea} onChange={(e)=>setTituloTarea(e.target.value)}/>
+    <button className="btnAgregarTarea" onClick={validarVacio}> Agregar tarea </button>
+    <ListadoTareas lista={data}/>
+           
     </>
+    
   )
 }
 
