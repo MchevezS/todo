@@ -35,7 +35,7 @@ function App() {
         <h1> Lista Tareas</h1>
         <input type='text' placeholder='ingrese su tarea' onChange={(e)=> setTituloTarea(e.target.value)}></input>
         <button onClick={agregarTarea}>Agregar Tarea</button>
-        <Visualizacion lista={data}/>
+        <ListadoTareas lista={data}/>
       </>
   )
 }
