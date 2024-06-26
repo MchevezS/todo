@@ -1,6 +1,3 @@
-import { obtenerDatos } from "../Js/Get.js";
-import { PostGuarda } from "../Js/Post.js";
-
 
 
 const ListaDeTarea = ({tareas}) =>{ //tareas es un parametro de esta funcion

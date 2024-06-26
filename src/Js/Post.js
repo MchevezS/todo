@@ -1,4 +1,4 @@
-const PostGuarda = async (tarea) => {
+const guardarDatos = async (tarea) => {
     try {
         const respuesta = await fetch ("http://localhost:3000/api/task",{
             method: "POST",
@@ -14,4 +14,4 @@ const PostGuarda = async (tarea) => {
         console.log(error);
     }
 }
-export {PostGuarda}
+export {guardarDatos}
