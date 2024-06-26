@@ -1,83 +1,42 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useState } from 'react'
 import './App.css'
-import { PostGuarda } from './Js/Post'
+import {guardarDatos } from './Js/Post'
 import {obtenerDatos} from './Js/Get'
-import ListadoTareas from './Componentes/ListadoTarea'
 import ListaDeTarea from './Componentes/ListaDeTareas'
+import ListadoTareas from './Componentes/ListadoTarea'
 
 
 function App() {
-  const [tituloTarea, setTituloTarea] = useState("")
-   const [data, setData]= useState([])
+  const [tituloTarea,setTituloTarea]=useState("")
+  const [listaTareas,setListaTareas]=useState(false)
+  const [data,setData]= useState([])
   useEffect(()=>{
-    const traeDatos = async() =>{
-      const datos = await obtenerDatos();
-      setData(datos)
-    }
-    traeDatos()
+      const traerDatos=async()=>{
+          const datos = await obtenerDatos();
+          setData(datos)
+          }
+          traerDatos()
   },[data])
-
-  const agregarTarea = async() =>{
+  const agregarTarea = async(e)=>{
     try {
-      console.log('Esta entrando a agregar tarea');
+      e.preventDefault()
       let tarea = {
-        titulo:tituloTarea,
-        estado:false
+        titulo:tituloTarea
       }
-      await PostGuarda(tarea)
-      
+      await guardarDatos(tarea)
+      setListaTareas(!listaTareas);
     } catch (error) {
       console.log(error);
     }
   }
-
-  // const validar = () => {
-  //   const inputTarea = inputRef.current.value;
-  //   let validarInput = true;
-  //   if (inputTarea.trim() === "") {
-  //     validar = false; 
-      
-  //   }
-  //   return validar;
-  // }
-
-
-  const inputTarea= useRef('')
-  const validarVacio = (e) =>{
-      e.preventDefault()              
-      console.log('ingresa a Validar Vacio');
-        if (!inputTarea.current.value) {
-                alert("INPUT VACIO")
-                return
-        }else{
-          console.log('mandande a agregar tarea desde validar vacio');
-          agregarTarea()
-          
-        }
-    }
-
-    // const [tareas, setTareas] = useState([...  ]) // Agrega tu lista de tareas aquí
-
-    // const eliminarTarea = (id) => {
-    //     // Lógica para eliminar la tarea con el id proporcionado//
-    // }
-   
-    //   const nuevasTareas = tareas.filter(tarea => tarea.id !== id);
-    //   // Actualizar el estado de tareas con la nueva lista filtrada
-    //   setTareas(nuevasTareas);
   
-
   return (
-    <>
-    <h1> Lista de tareas </h1>
-    
-    <input placeholder="Inserte sus tareas" type="text" ref={inputTarea} onChange={(e)=>setTituloTarea(e.target.value)}/>
-    <button className="btnAgregarTarea" onClick={validarVacio}> Agregar tarea </button>
-     <ListadoTareas lista={data}/> 
-    {/* <ListadoTareas lista={tareas} eliminarTarea={eliminarTarea} />      */}
-    </>
-    
+      <>
+        <h1> Lista Tareas</h1>
+        <input type='text' placeholder='ingrese su tarea' onChange={(e)=> setTituloTarea(e.target.value)}></input>
+        <button onClick={agregarTarea}>Agregar Tarea</button>
+        <Visualizacion lista={data}/>
+      </>
   )
 }
-
 export default App
