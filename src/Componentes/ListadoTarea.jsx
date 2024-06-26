@@ -1,14 +1,16 @@
-import { eliminarTarea } from "../Js/Delete"
-import ListaDeTarea from "./ListaDeTareas"
+import { eliminarTarea } from "../Js/Delete";
+import { cambiarDatos } from "../Js/Put";
+import ListaDeTarea from "./ListaDeTareas";
+import { useEffect, useState } from "react";
 
-const ListadoTareas = ({lista, eliminarTarea }) => {
+const ListadoTareas = ({lista }) => {
     return(
         <>
-            {lista && lista.map((tarea) => (
-                <div key={tarea.id}>
-                    <input type="checkbox"/>
+            {lista.map((tarea) => (
+                <div>
+                    <input type="checkbox" onChange={cambiarDatos}/>
                     <p>{tarea.titulo}</p>
-//                     <button onClick={() => eliminarTarea(tarea.id)}>Eliminar </button>
+//                     <button onClick={()=>eliminarTarea(tarea.id)}>Eliminar </button>
                 </div>
             ))}
         </>
@@ -16,20 +18,3 @@ const ListadoTareas = ({lista, eliminarTarea }) => {
 }
 
 export default ListadoTareas;
-// // import React from 'react';
-
-// const ListadoTareas = ({ lista }) => {
-//     return (
-//         <>
-//             {lista.map((tarea) => (
-//                 <div key={tarea.id}>
-//                     <input type="checkbox" />
-//                     <p>{tarea.titulo}</p>
-//                     <button onClick={() => eliminarTarea(tarea.id)}>Eliminar tarea</button>
-//                 </div>
-//             ))}
-//         </>
-//     );
-// }
-
-// export default ListadoTareas;
